@@ -1,8 +1,9 @@
 Custom injection extension for the HTML Webpack Plugin
 ========================================
 
-Enhances [html-webpack-plugin](https://github.com/ampedandwired/html-webpack-plugin)
-functionality by adding the `{custominject: true|false, styleplaceholder: 'style_placeholder_string', scriptplaceholder: 'script_placeholder_string'}` option.
+Enhances [html-webpack-plugin](https://github.com/ampedandwired/html-webpack-plugin) functionality by adding the 
+`{custominject: true|false, styleplaceholder: 'style_placeholder_string', scriptplaceholder: 'script_placeholder_string'}`
+option.
 
 This is an extension plugin for the [webpack](http://webpack.github.io) plugin [html-webpack-plugin](https://github.com/ampedandwired/html-webpack-plugin) - a plugin that simplifies the creation of HTML files to serve your webpack bundles.
 
@@ -20,7 +21,7 @@ Basic Usage
 Require the plugin in your webpack config:
 
 ```javascript
-var HtmlWebpackCustomInjectPlugin = require('html-webpack-custominject-plugin');
+const HtmlWebpackCustomInjectPlugin = require('html-webpack-custominject-plugin');
 ```
 
 Add the plugin to your webpack config as follows:
@@ -76,7 +77,9 @@ plugins: [
 
 This plugin does not actually perform custom injection in the following cases.
 
-1.It will do nothing if the plugin configuration didn't set `custominject` to true or set `inject` true
-2.It will do nothing if the plugin configuration didn't set `styleplaceholder` or `scriptplaceholder`, then will use html-webpack-plugin default inject
+1、It will do nothing if the plugin configuration didn't set `custominject` to true or set `inject` true
+
+2、It will do nothing if the plugin configuration didn't set `styleplaceholder` or `scriptplaceholder`, then will use html-webpack-plugin default inject
+
 
 If you didn't set `styleplaceholder` or `scriptplaceholder` placeholder string in you temeplates, actually unable to implement custom injection.
