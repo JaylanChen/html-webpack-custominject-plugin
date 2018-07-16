@@ -1,0 +1,29 @@
+{
+  "name": "html-webpack-custominject-plugin",
+  "version": "1.0.0",
+  "description": "custom inject styles and scripts in the template when using the webpack dev server or middleware",
+  "main": "index.js",
+  "files": [
+    "index.js"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JaylanChen/html-webpack-custominject-plugin.git"
+  },
+  "keywords": [
+    "webpack",
+    "plugin",
+    "html-webpack-plugin",
+    "custom inject",
+    "template"
+  ],
+  "author": "JaylanChen",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/JaylanChen/html-webpack-custominject-plugin/issues"
+  },
+  "homepage": "https://github.com/JaylanChen/html-webpack-custominject-plugin"
+}
