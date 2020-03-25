@@ -1,6 +1,6 @@
 {
   "name": "html-webpack-custominject-plugin",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "custom inject styles and scripts in the template when using the webpack dev server or middleware",
   "main": "index.js",
   "files": [
