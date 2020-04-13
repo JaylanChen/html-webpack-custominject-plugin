@@ -3,33 +3,33 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 class HtmlWebpackCustomInjectPlugin {
-  apply (compiler) {
+  apply(compiler) {
     // html-webpack-plugin 4.x
     if (HtmlWebpackPlugin.getHooks) {
-    compiler.hooks.compilation.tap('HtmlWebpackCustomInject', function (compilation) {
-      HtmlWebpackPlugin.getHooks(compilation).afterTemplateExecution.tapAsync('HtmlWebpackCustomInject', function(htmlPluginData, callback){
-        let htmlWebpackPluginOptions = htmlPluginData.plugin.options;
-        
-        const { htmlTagObjectToString } = require('html-webpack-plugin/lib/html-tags');
-        
-        const styleHtmlStr = htmlPluginData.headTags.reduce((styleTagHtml, assetTagObject) => styleTagHtml +htmlTagObjectToString(assetTagObject, htmlWebpackPluginOptions.xhtml), '');
-        const scriptHtmlStr = htmlPluginData.bodyTags.reduce((scriptTagHtml, assetTagObject) =>scriptTagHtml + htmlTagObjectToString(assetTagObject, htmlWebpackPluginOptions.xhtml), '');
-        
-        customInjectAsset(htmlPluginData, {styleHtmlStr, scriptHtmlStr}, callback);
+      compiler.hooks.compilation.tap('HtmlWebpackCustomInject', function (compilation) {
+        HtmlWebpackPlugin.getHooks(compilation).afterTemplateExecution.tapAsync('HtmlWebpackCustomInject', function (htmlPluginData, callback) {
+          let htmlWebpackPluginOptions = htmlPluginData.plugin.options;
+
+          const { htmlTagObjectToString } = require('html-webpack-plugin/lib/html-tags');
+
+          const styleHtmlStr = htmlPluginData.headTags.reduce((styleTagHtml, assetTagObject) => styleTagHtml + htmlTagObjectToString(assetTagObject, htmlWebpackPluginOptions.xhtml), '');
+          const scriptHtmlStr = htmlPluginData.bodyTags.reduce((scriptTagHtml, assetTagObject) => scriptTagHtml + htmlTagObjectToString(assetTagObject, htmlWebpackPluginOptions.xhtml), '');
+
+          customInjectAsset(htmlPluginData, { styleHtmlStr, scriptHtmlStr }, callback);
+        });
       });
-    });
-  } else {
+    } else {
       // html-webpack-plugin 3.2
-    compiler.hooks.compilation.tap('HtmlWebpackCustomInject', function (compilation) {
-      compilation.hooks.htmlWebpackPluginBeforeHtmlProcessing.tap('HtmlWebpackCustomInject', function (htmlPluginData, callback) {
-        
-        let styleHtmlStr = htmlPluginData.assets.css.reduce((styleTagHtml, styleAsset)=> styleTagHtml + '<link rel="stylesheet" href="' + styleAsset + '"/>', '');
-        let scriptHtmlStr = htmlPluginData.assets.js.reduce((scriptTagHtml, scriptAsset)=> scriptTagHtml + '<script src="' + scriptAsset + '"></script>', '');
-        
-        customInjectAsset(htmlPluginData, {styleHtmlStr, scriptHtmlStr}, callback);
+      compiler.hooks.compilation.tap('HtmlWebpackCustomInject', function (compilation) {
+        compilation.hooks.htmlWebpackPluginBeforeHtmlProcessing.tap('HtmlWebpackCustomInject', function (htmlPluginData, callback) {
+
+          let styleHtmlStr = htmlPluginData.assets.css.reduce((styleTagHtml, styleAsset) => styleTagHtml + '<link rel="stylesheet" href="' + styleAsset + '"/>', '');
+          let scriptHtmlStr = htmlPluginData.assets.js.reduce((scriptTagHtml, scriptAsset) => scriptTagHtml + '<script src="' + scriptAsset + '"></script>', '');
+
+          customInjectAsset(htmlPluginData, { styleHtmlStr, scriptHtmlStr }, callback);
+        });
       });
-    });
-  }
+    }
   }
 
 }
@@ -57,7 +57,7 @@ function customInjectAsset(htmlPluginData, assetsData, callback) {
       return;
     }
   }
-  
+
   // Custom inject styles
   if (assetsData.styleHtmlStr) {
     htmlPluginData.html = htmlPluginData.html.replace(htmlWebpackPluginOptions.styleplaceholder, assetsData.styleHtmlStr);
